@@ -1,0 +1,31 @@
+.container
+{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background-color: #D3590B;
+    border-radius: 100%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+}
+
+.container:hover 
+{
+    background-color: #FFE8D9;
+}
+
+.container:hover .icon
+{
+    color: #D3590B;
+}
+
+.icon
+{
+    object-fit: contain;
+    color: #FFFFFF;
+}
