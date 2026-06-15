@@ -1,0 +1,26 @@
+.container
+{
+    position: relative;
+    min-width: 40px;
+    height: 40px;
+    background-color: #FFFFFF;
+    color: #D3590B;
+    border-radius: 8px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+    padding: 0px 14px 0px 14px;
+}
+
+.container:hover{
+    background-color: #FFE8D9;
+}
+
+.icon>*{
+    margin-right: 10px;
+    width: 16px;
+}

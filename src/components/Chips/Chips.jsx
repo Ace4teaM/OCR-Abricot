@@ -1,15 +1,25 @@
 import { memo } from 'react';
 import styles from './Chips.module.css';
+import { SquareCheckBig, CalendarDays, FolderOpen } from 'lucide-react';
 
 const Chips = ({
-  children,
-  className = "",
+  children = "Mes tâches",
+  type = "",
   ...props
 }) => {
+
+  const Icons = {
+    "task": <SquareCheckBig></SquareCheckBig>,
+    "kaban": <CalendarDays></CalendarDays>,
+    "project": <FolderOpen></FolderOpen>,
+  }
+  const Icon = Icons[type];
+
   return (
     <button
+      className={styles.container}
       {...props}
-    >{children}</button>
+    >{Icon && <span className={styles.icon}>{Icon}</span>}{children}</button>
   );
 };
 
