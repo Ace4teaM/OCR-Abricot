@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import styles from './ChipButton.module.css';
 import { SquareCheckBig, CalendarDays, FolderOpen } from 'lucide-react';
+import {BaseButton} from '@/components/Buttons'
 
 const ChipButton = ({
   children = "Mes tâches",
@@ -16,10 +17,10 @@ const ChipButton = ({
   const Icon = Icons[type];
 
   return (
-    <button
+    <BaseButton
       className={styles.container}
       {...props}
-    >{Icon && <span className={styles.icon}>{Icon}</span>}{children}</button>
+    >{Icon && <span className={styles.icon}>{Icon}</span>}{children}</BaseButton>
   );
 };
 

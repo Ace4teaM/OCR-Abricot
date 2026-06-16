@@ -6,12 +6,6 @@
     background-color: #D3590B;
     border-radius: 100%;
     border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    cursor: pointer;
-    user-select: none;
 }
 
 .container:hover 

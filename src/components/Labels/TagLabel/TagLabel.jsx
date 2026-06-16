@@ -1,18 +1,16 @@
 import { memo } from 'react';
 import styles from './TagLabel.module.css';
+import {BaseLabel} from '@/components/Labels'
 
 const TagLabel = ({
-  children = "label",
-  color = "green",
   ...props
 }) => {
 
   return (
-    <span
+    <BaseLabel
       className={styles.container}
-      data-color={color}
       {...props}
-    >{children}</span>
+    ></BaseLabel>
   );
 };
 

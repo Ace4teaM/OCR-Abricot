@@ -1,6 +1,7 @@
 import styles from "./page.module.css";
 import {IAButton, ChipButton} from "@/components/Buttons";
 import {TagLabel} from "@/components/Labels";
+import {ProjectCard} from "@/components/Cards";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         <TagLabel color="yellow"></TagLabel>
         <TagLabel color="blue"></TagLabel>
         <TagLabel color="gray"></TagLabel>
+        <ProjectCard></ProjectCard>
       </main>
     </div>
   );
