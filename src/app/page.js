@@ -1,23 +1,22 @@
 import styles from "./page.module.css";
-import ButtonIA from "@/components/ButtonIA/ButtonIA";
-import Chips from "@/components/Chips/Chips";
-import Tag from "@/components/Tag/Tag";
+import {IAButton, ChipButton} from "@/components/Buttons";
+import {TagLabel} from "@/components/Labels";
 
 export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <ButtonIA></ButtonIA>
-        <Chips>Personnalisé</Chips>
-        <Chips type="task">Mes tâches</Chips>
-        <Chips type="kaban">Kaban</Chips>
-        <Chips type="project">Mes projets</Chips>
-        <Tag color="green"></Tag>
-        <Tag color="orange"></Tag>
-        <Tag color="red"></Tag>
-        <Tag color="yellow"></Tag>
-        <Tag color="blue"></Tag>
-        <Tag color="gray"></Tag>
+        <IAButton></IAButton>
+        <ChipButton>Personnalisé</ChipButton>
+        <ChipButton type="task">Mes tâches</ChipButton>
+        <ChipButton type="kaban">Kaban</ChipButton>
+        <ChipButton type="project">Mes projets</ChipButton>
+        <TagLabel color="green"></TagLabel>
+        <TagLabel color="orange"></TagLabel>
+        <TagLabel color="red"></TagLabel>
+        <TagLabel color="yellow"></TagLabel>
+        <TagLabel color="blue"></TagLabel>
+        <TagLabel color="gray"></TagLabel>
       </main>
     </div>
   );

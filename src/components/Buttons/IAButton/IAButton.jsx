@@ -1,7 +1,7 @@
 import { memo } from 'react';
-import styles from './ButtonIA.module.css';
+import styles from './IAButton.module.css';
 
-const ButtonIA = ({
+const IAButton = ({
   ...props
 }) => {
   return (
@@ -17,4 +17,4 @@ const ButtonIA = ({
   );
 };
 
-export default memo(ButtonIA);
+export default memo(IAButton);

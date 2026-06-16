@@ -1,8 +1,8 @@
 import { memo } from 'react';
-import styles from './Chips.module.css';
+import styles from './ChipButton.module.css';
 import { SquareCheckBig, CalendarDays, FolderOpen } from 'lucide-react';
 
-const Chips = ({
+const ChipButton = ({
   children = "Mes tâches",
   type = "",
   ...props
@@ -23,4 +23,4 @@ const Chips = ({
   );
 };
 
-export default memo(Chips);
+export default memo(ChipButton);

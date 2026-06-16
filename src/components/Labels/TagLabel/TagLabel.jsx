@@ -1,7 +1,7 @@
 import { memo } from 'react';
-import styles from './Tag.module.css';
+import styles from './TagLabel.module.css';
 
-const Tag = ({
+const TagLabel = ({
   children = "label",
   color = "green",
   ...props
@@ -16,4 +16,4 @@ const Tag = ({
   );
 };
 
-export default memo(Tag);
+export default memo(TagLabel);
