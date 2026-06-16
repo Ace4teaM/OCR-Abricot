@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
-import {IAButton, ChipButton} from "@/components/Buttons";
+import {IAButton, ChipButton, MenuItemButton} from "@/components/Buttons";
 import {TagLabel} from "@/components/Labels";
 import {ProjectCard} from "@/components/Cards";
 
@@ -18,6 +18,8 @@ export default function Home() {
         <TagLabel color="yellow"></TagLabel>
         <TagLabel color="blue"></TagLabel>
         <TagLabel color="gray"></TagLabel>
+        <MenuItemButton></MenuItemButton>
+        <MenuItemButton iconName="project">Projets</MenuItemButton>
         <ProjectCard></ProjectCard>
       </main>
     </div>
