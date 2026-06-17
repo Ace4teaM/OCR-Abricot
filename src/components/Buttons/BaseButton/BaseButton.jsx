@@ -6,14 +6,17 @@ import styles from './BaseButton.module.css';
  */
 const BaseButton = ({
   className="",
+  as = "button",
   children,
   ...props
 }) => {
 
+  const BaseType = as;
+
   return (
-    <button className={`${styles.container} ${className}`} {...props}>
+    <BaseType className={`${styles.container} ${className}`} {...props}>
       {children}
-    </button>
+    </BaseType>
   );
 };
 
