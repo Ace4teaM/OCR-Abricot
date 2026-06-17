@@ -5,6 +5,8 @@
     border-radius: 10px;
     border: none;
     padding: 30px 34px 30px 34px;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
 }
 
 .content

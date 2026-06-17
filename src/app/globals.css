@@ -31,10 +31,16 @@ body {
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
   color: #D3590B;
   text-decoration: underline;
+}
+
+a:focus {
+  color: #0F0F0F;
+}
+
+a:disabled {
+  color: #9CA3AF;
 }
 
 form  input:is([type="text"], [type="email"], [type="password"]){

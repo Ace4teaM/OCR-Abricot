@@ -1,0 +1,87 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-geist-sans);
+  background-color: var(--background);
+  margin: 60px;
+  border:none;
+}
+
+.headerViewType {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+
+
+.headerInfos {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+.headerInfos h2 {
+  font-size: 1.3em;
+  margin-bottom: 0.5em;
+}
+
+
+.list {
+  border:1px solid #E5E7EB;
+  margin-top: 20px;
+  border-radius: 10px;
+  padding: 40px 59px;
+}
+
+.listSearch
+{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.listSearch input{
+  font-size: 0.8em;
+  border-radius: 4px;
+  background-color: white;
+  border: 1px solid #E5E7EB;
+  padding: 13px 40px 13px 20px;
+  width: 257px;
+  color:#6B7280;
+}
+
+.listSearchIcon{
+  position: absolute;
+  right: 10px;
+  top: 16px;
+  color:#6B7280;
+}
+
+.listContent{
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.kabanColumns{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.columnContent{
+  border: 1px solid #FFE0E0;
+  border-radius: 10px;
+  padding: 40px 24px;
+}
+
+.columnStatus{
+  margin-bottom: 24px;
+}
