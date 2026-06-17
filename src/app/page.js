@@ -2,6 +2,7 @@ import styles from "./page.module.css";
 import {IAButton, ChipButton, MenuItemButton, IconButton, Button} from "@/components/Buttons";
 import {TagLabel} from "@/components/Labels";
 import {ProjectCard} from "@/components/Cards";
+import {UserComment} from "@/components/Parts";
 
 export default function Home() {
   return (
@@ -37,6 +38,7 @@ export default function Home() {
           <TagLabel color="gray"></TagLabel>
         </div>
         <ProjectCard></ProjectCard>
+        <UserComment></UserComment>
       </main>
     </div>
   );
