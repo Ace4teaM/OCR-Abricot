@@ -11,7 +11,7 @@ const BaseButton = ({
 }) => {
 
   return (
-    <button className={`${styles.container} ${className}`}>
+    <button className={`${styles.container} ${className}`} {...props}>
       {children}
     </button>
   );
