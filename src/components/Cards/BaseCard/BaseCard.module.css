@@ -1,16 +1,15 @@
 .container
 {
-    position: relative;
     background-color: #FFFFFF;
     color: #000000;
     border-radius: 10px;
     border: none;
-    display: flex;
+    padding: 30px 34px 30px 34px;
 }
 
 .content
 {
-    margin: 30px 34px 30px 34px;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

@@ -1,13 +1,13 @@
 import styles from "./page.module.css";
 import {IAButton, ChipButton, MenuItemButton, IconButton, Button} from "@/components/Buttons";
 import {TagLabel} from "@/components/Labels";
-import {ProjectCard} from "@/components/Cards";
+import {ProjectCard, TaskCard} from "@/components/Cards";
 import {UserComment} from "@/components/Parts";
 
 export default function Home() {
   return (
     <div className={styles.page}>
-      <main className={styles.main}>
+      <main>
         <div>
           <IAButton></IAButton>
         </div>
@@ -37,6 +37,7 @@ export default function Home() {
           <TagLabel color="blue"></TagLabel>
           <TagLabel color="gray"></TagLabel>
         </div>
+        <TaskCard></TaskCard>
         <ProjectCard></ProjectCard>
         <UserComment></UserComment>
         <UserComment hasNew={true}></UserComment>

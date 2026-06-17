@@ -5,13 +5,11 @@ import {TagLabel, UserLabel} from '@/components/Labels'
 import {Users} from 'lucide-react';
 
 const ProjectCard = ({
-  width="380px",
-  height="350px",
   ...props
 }) => {
 
   return (
-    <BaseCard width={width} height={height} {...props}>
+    <BaseCard {...props}>
       <header>
         <h2>Nom du projet</h2>
         <p>Développement de la nouvelle version de l'API REST avec authentification JWT</p>

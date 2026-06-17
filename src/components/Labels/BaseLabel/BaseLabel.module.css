@@ -13,6 +13,7 @@
     overflow: hidden;
     cursor: default;
     user-select: none;
+    padding: 4px 16px 4px 16px;
 }
 
 .container[data-color="green"]

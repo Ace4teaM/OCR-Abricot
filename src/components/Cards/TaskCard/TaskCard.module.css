@@ -1,0 +1,39 @@
+.container{
+    container-type: inline-size;
+}
+
+.tag{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.button{
+    position: relative;
+    margin-top: 20px;
+}
+
+@container (min-width: 630px) {
+    .button{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+.title{
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.description{
+    font-size: 1em;
+}
+
+.container section{
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
