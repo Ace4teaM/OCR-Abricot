@@ -1,0 +1,26 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-geist-sans);
+  background-color: var(--background);
+  margin: 60px;
+  border:none;
+}
+
+.headerInfos {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.headerInfos h2 {
+  font-size: 1.3em;
+  margin-bottom: 0.5em;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
