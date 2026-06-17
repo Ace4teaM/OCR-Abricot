@@ -1,4 +1,6 @@
-import { memo } from 'react';
+"use client"
+
+import { memo, useState } from 'react';
 import styles from './UserComment.module.css';
 import Image from 'next/image'
 import {UserLabel} from '@/components/Labels'
@@ -8,8 +10,11 @@ const UserComment = ({
   lastname = "Dupond",
   date = "2026-06-17T11:20:00",
   comment = "Attention à bien gérer l'expiration des tokens et le refresh automatique côté client.",
+  hasNew = false,
   ...props
 }) => {
+
+  const [text, setText] = useState(comment)
 
   const formatDate = (value) => {
 
@@ -45,11 +50,17 @@ const UserComment = ({
       {...props}
     >
         <UserLabel withBorder={true} firstname = {firstname} lastname = {lastname}></UserLabel>
-        <div className={styles.content}>
-          <div className={styles.title}>{firstname} {lastname}</div>
-          <div className={styles.comment}>{comment}</div>
-          <div className={styles.date}>{formatDate(date)}</div>
-        </div>
+        {!hasNew ?
+          <div className={styles.content}>
+            <div className={styles.title}>{firstname} {lastname}</div>
+            <div className={styles.comment}>{comment}</div>
+            <div className={styles.date}>{formatDate(date)}</div>
+          </div>
+          :
+          <div className={styles.content}>
+            <input type='text' className={styles.comment} value={text} onChange={(e)=>setText(e.target.value)} placeholder='Ajouter un commentaire...'></input>
+          </div>
+        }
     </div>
   );
 };
