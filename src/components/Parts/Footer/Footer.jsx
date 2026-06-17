@@ -11,7 +11,7 @@ const Footer = ({
       className={styles.container}
       {...props}
     >
-        <Image src="/logo_black.png" width={101} height={13}></Image>
+        <Image src="/logo_black.png" alt="logo" width={101} height={13}></Image>
         <span>Abricot 2025</span>
     </nav>
   );

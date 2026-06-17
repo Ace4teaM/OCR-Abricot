@@ -12,7 +12,7 @@ const MainMenu = ({
       className={styles.container}
       {...props}
     >
-        <Image src="/logo_orange.png" width={147} height={18}></Image>
+        <Image src="/logo_orange.png" alt="logo" width={147} height={18}></Image>
         <div>
             <MenuItemButton iconName = "dashboard" as="span">Tableau de bord</MenuItemButton>
             <MenuItemButton iconName = "project" as="span">Projets</MenuItemButton>
