@@ -32,8 +32,8 @@ const ProjectCard = ({
           <UserLabel color="orange"></UserLabel>
           <TagLabel color="orange">Propriétaire</TagLabel>
           <div className={styles.usersGroup}>
-            <UserLabel color="gray" firstname="Billy" lastname="Dupont"></UserLabel>
-            <UserLabel color="gray" firstname="Caroline" lastname="Vincent"></UserLabel>
+            <UserLabel withBorder={true} color="gray" firstname="Billy" lastname="Dupont"></UserLabel>
+            <UserLabel withBorder={true} color="gray" firstname="Caroline" lastname="Vincent"></UserLabel>
           </div>
         </div>
       </footer>

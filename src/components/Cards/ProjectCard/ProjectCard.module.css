@@ -30,7 +30,6 @@
 
 .usersGroup > *{
     margin-left: -7px;
-    border: 1px solid white;
 }
 
 .usersGroup > *:first-child{

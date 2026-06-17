@@ -5,3 +5,8 @@
     color: black !important;
     font-size: 80%;
 }
+
+.containerBorder
+{
+    border: 1px solid white;
+}
