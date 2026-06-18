@@ -1,0 +1,21 @@
+.container{
+  position: relative;
+  display: inline-block;
+}
+
+.searchInput{
+  font-size: 0.8em;
+  border-radius: 4px;
+  background-color: white;
+  border: 1px solid #E5E7EB;
+  padding: 13px 40px 13px 20px;
+  width: 257px;
+  color:#6B7280;
+}
+
+.searchIcon{
+  position: absolute;
+  right: 10px;
+  top: 16px;
+  color:#6B7280;
+}

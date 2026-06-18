@@ -1,0 +1,48 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-geist-sans);
+  background-color: var(--background);
+  margin: 60px;
+  border:none;
+}
+
+.headerInfos {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.headerInfos h2 {
+  font-size: 1.3em;
+  margin-bottom: 0.5em;
+  margin-right: 0.5em;
+  display: inline-block;
+}
+
+.headerInfos h2 + a {
+  display: inline-block;
+}
+
+.prevButton{
+  position: absolute;
+  margin-left: -60px;
+}
+
+.contributors{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #F3F4F6;
+  border: none;
+  border-radius: 10px;
+  padding: 20px 50px;
+  margin-bottom: 40px;
+}
+
+.strong{
+  font-weight: 600;
+}

@@ -1,12 +1,12 @@
 "use client"
 
 import styles from "./page.module.css";
+import {SearchInput} from "@/components/Inputs";
 import {Button, ChipButton} from "@/components/Buttons";
 import {TagLabel} from "@/components/Labels";
 import {TaskCard} from "@/components/Cards";
 import Link from 'next/link'
 import { useId, useState } from "react";
-import { Search } from 'lucide-react';
 
 export default function Dashboard() {
   
@@ -36,10 +36,7 @@ export default function Dashboard() {
             <h3>Mes tâches assignées</h3>
             <p>Par ordre de priorité</p>
           </div>
-          <div>
-            <input type="text" placeholder="Rechercher une tâche"></input>
-            <Search size={14} className={styles.listSearchIcon}></Search>
-          </div>
+          <SearchInput placeholder="Rechercher une tâche"></SearchInput>
         </div>
         <div className={styles.listContent}>
           <TaskCard></TaskCard>

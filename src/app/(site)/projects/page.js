@@ -1,12 +1,6 @@
-"use client"
-
 import styles from "./page.module.css";
-import {Button, ChipButton} from "@/components/Buttons";
-import {TagLabel} from "@/components/Labels";
+import {Button} from "@/components/Buttons";
 import {ProjectCard} from "@/components/Cards";
-import Link from 'next/link'
-import { useId, useState } from "react";
-import { Search } from 'lucide-react';
 
 export default function Projects() {
   
