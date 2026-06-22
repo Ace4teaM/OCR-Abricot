@@ -1,0 +1,30 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-geist-sans);
+  background-color: var(--background);
+  margin: 60px;
+  border:none;
+}
+
+.page form{
+    display: flex;
+    flex-direction: column;
+    color: black;
+
+}
+.headerInfos {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+.headerInfos h2 {
+  font-size: 1.3em;
+  margin-bottom: 0.5em;
+}
+
+.footer {
+  margin-top: 20px;
+}

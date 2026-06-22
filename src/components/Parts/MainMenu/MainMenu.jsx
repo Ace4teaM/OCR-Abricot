@@ -1,7 +1,8 @@
 import { memo } from 'react';
 import styles from './MainMenu.module.css';
 import {MenuItemButton, UserButton} from '@/components/Buttons'
-import Image from 'next/image'
+import {Abricot} from '@/components/Icons'
+import Link from 'next/link'
 
 const MainMenu = ({
   ...props
@@ -12,12 +13,12 @@ const MainMenu = ({
       className={styles.container}
       {...props}
     >
-        <Image src="/logo_orange.png" alt="logo" width={147} height={18}></Image>
+        <Link href="/"><Abricot width={147} height={18} color="#D3590B"></Abricot></Link>
         <div>
-            <MenuItemButton iconName = "dashboard" as="span">Tableau de bord</MenuItemButton>
-            <MenuItemButton iconName = "project" as="span">Projets</MenuItemButton>
+            <Link href="/dashboard"><MenuItemButton iconName = "dashboard" as="span">Tableau de bord</MenuItemButton></Link>
+            <Link href="/projects"><MenuItemButton iconName = "project" as="span">Projets</MenuItemButton></Link>
         </div>
-        <UserButton as="span"></UserButton>
+        <Link href="/account"><UserButton as="span"></UserButton></Link>
     </nav>
   );
 };
