@@ -35,7 +35,7 @@ export default function SingIn() {
         <div>Déjà inscrit ? <Link href="/login">Se connecter</Link></div>
       </div>
       <div className={styles.imageContainer}>
-        <Image src="/signin.jpg" alt="logo" fill priority className={styles.image}></Image>
+        <Image src="/signin.jpg" alt="logo" sizes="(max-width: 768px) 0vw, 60vw" fill priority className={styles.image}></Image>
       </div>
     </div>
   );

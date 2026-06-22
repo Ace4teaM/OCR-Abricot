@@ -36,7 +36,7 @@ export default function LogIn() {
         <div>Pas encore de compte ? <Link href="/signin">Créer un compte</Link></div>
       </div>
       <div className={styles.imageContainer}>
-        <Image src="/login.png" alt="logo" fill priority className={styles.image}></Image>
+        <Image src="/login.png" alt="logo" sizes="(max-width: 768px) 0vw, 60vw" fill priority className={styles.image}></Image>
       </div>
     </div>
   );
