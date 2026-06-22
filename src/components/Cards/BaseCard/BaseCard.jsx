@@ -14,9 +14,7 @@ const BaseCard = ({
 
   return (
     <div className={styles.container} style={{ width, height }}>
-      <div className={styles.content}>
         {children}
-      </div>
     </div>
   );
 };

@@ -1,0 +1,18 @@
+.content{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.footer
+{
+    margin-top: 20px;
+}
+
+.taskList{
+    overflow-y: scroll;
+    max-height: 300px;
+}
+.taskList > *{
+    margin-bottom: 20px;
+}

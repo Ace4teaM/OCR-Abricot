@@ -1,0 +1,21 @@
+
+.container{
+  margin: auto;
+  border: none;
+  background: none;
+}
+
+.content{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: var(--font-inter);
+}
+
+.closeBtn{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}

@@ -43,7 +43,7 @@ a:disabled {
   color: #9CA3AF;
 }
 
-form  input:is([type="text"], [type="email"], [type="password"]){
+form  input:is([type="text"], [type="email"], [type="password"], [type="date"]){
   font-size: 1.3em;
   border-radius: 4px;
   background-color: white;

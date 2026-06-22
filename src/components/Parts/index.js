@@ -1,3 +1,8 @@
 export { default as MainMenu } from "./MainMenu";
 export { default as Footer } from "./Footer";
 export { default as UserComment } from "./UserComment";
+export { default as CreateTaskDialog } from "./CreateTaskDialog";
+export { default as CreateTaskDialogIA } from "./CreateTaskDialogIA";
+export { default as UpdateTaskDialog } from "./UpdateTaskDialog";
+export { default as CreateProjectDialog } from "./CreateProjectDialog";
+export { default as UpdateProjectDialog } from "./UpdateProjectDialog";

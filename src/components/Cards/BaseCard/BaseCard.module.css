@@ -7,10 +7,6 @@
     padding: 30px 34px 30px 34px;
     border: 1px solid #E5E7EB;
     border-radius: 10px;
-}
-
-.content
-{
     position: relative;
     display: flex;
     flex-direction: column;
@@ -20,7 +16,7 @@
     font-size: 0.9em;
 }
 
-.content header > h2
+.container header > h2
 {
     font-weight: 600;
     color: black;

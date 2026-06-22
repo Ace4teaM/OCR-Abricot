@@ -1,11 +1,10 @@
 import { memo } from 'react';
-import styles from './TaskCard.module.css';
+import styles from './EditTaskCard.module.css';
 import {BaseCard} from '@/components/Cards'
-import {TagLabel} from '@/components/Labels'
 import {Button} from '@/components/Buttons'
-import {FolderOpen, CalendarDays, MessageSquareText} from 'lucide-react';
+import {Trash2, Pen} from 'lucide-react';
 
-const TaskCard = ({
+const EditTaskCard = ({
   minWidth="380px",
   minHeight="350px",
   ...props
@@ -17,17 +16,13 @@ const TaskCard = ({
         <header>
           <h2>Nom de la tâche</h2>
           <p className={styles.description}>Description de la tâche</p>
-          <TagLabel className={styles.tag}>À faire</TagLabel>
         </header>
         <section>
-          <FolderOpen></FolderOpen> Nom du projet | <CalendarDays></CalendarDays> 9 mars | <MessageSquareText></MessageSquareText> 2
+          <Trash2></Trash2> Supprimer | <Pen></Pen> Modifier
         </section>
-        <footer>
-          <Button className={styles.button}>Voir</Button>
-        </footer>
       </div>
     </BaseCard>
   );
 };
 
-export default memo(TaskCard);
+export default memo(EditTaskCard);

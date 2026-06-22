@@ -4,14 +4,27 @@ import styles from './BaseLabel.module.css';
 const BaseLabel = ({
   className = "",
   children = "label",
-  color = "green",
+  color = () => { /* string | func */
+    switch(children){
+      case "À faire":
+        return "red";
+      case "Terminée":
+        return "green";
+      case "En cours":
+        return "yellow";
+    }
+    return "green";
+  },
   ...props
 }) => {
+
+  const resolvedColor =
+    typeof color === "function" ? color() : color;
 
   return (
     <span
       className={`${styles.container} ${className}`}
-      data-color={color}
+      data-color={resolvedColor}
       {...props}
     >{children}</span>
   );
