@@ -2,6 +2,7 @@
 
 import styles from "./page.module.css";
 import {Button} from "@/components/Buttons";
+import {Abricot} from "@/components/Icons";
 import Image from 'next/image'
 import Link from 'next/link'
 import { useId } from "react";
@@ -23,7 +24,7 @@ export default function LogIn() {
   return (
     <div className={styles.page}>
       <div className={styles.formContainer}>
-        <Image src="/logo_orange.png" alt="logo" width={252} height={32}></Image>
+        <Abricot width={252} height={32} color="#D3590B" priority></Abricot>
         <form className={styles.form}>
           <h2>Connexion</h2>
           <label htmlFor={email_id}>Email</label>
