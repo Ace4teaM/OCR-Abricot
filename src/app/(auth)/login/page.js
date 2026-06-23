@@ -3,14 +3,43 @@
 import styles from "./page.module.css";
 import {Button} from "@/components/Buttons";
 import {Abricot} from "@/components/Icons";
+import {usePost} from "@/hooks/Http";
 import Image from 'next/image'
 import Link from 'next/link'
-import { useId } from "react";
+import { useId, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LogIn() {
+  const router = useRouter();
 
   const email_id = useId();
   const password_id = useId();
+
+  const [ data, setData ] = useState(null)
+  const login = usePost("auth/login", data, process.env.NEXT_PUBLIC_USER_API_URL)
+
+  useEffect(()=>{
+    if(login.hasData == false || login.data.length == 0)
+      return
+
+    console.log("login.data", login.data)
+
+    if(login.data.success)
+    {
+      router.push("/dashboard");
+    }
+    else{
+      /* gestion des erreurs */
+    }
+  }, [login.hasData])
+
+  useEffect(()=>{
+    if(login.error)
+    {
+      console.log("login.error", login.error, login.data)
+      return
+    }
+  }, [login.error])
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Empêche la soumission du formulaire
@@ -19,12 +48,14 @@ export default function LogIn() {
     const data = Object.fromEntries(formData.entries())
 
     console.log(data);
+
+    setData(data);
   };
 
   return (
     <div className={styles.page}>
       <div className={styles.formContainer}>
-        <Abricot width={252} height={32} color="#D3590B" priority></Abricot>
+        <Abricot width={252} height={32} color="#D3590B"></Abricot>
         <form className={styles.form}>
           <h2>Connexion</h2>
           <label htmlFor={email_id}>Email</label>

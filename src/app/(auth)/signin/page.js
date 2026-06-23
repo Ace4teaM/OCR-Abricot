@@ -24,7 +24,7 @@ export default function SingIn() {
   return (
     <div className={styles.page}>
       <div className={styles.formContainer}>
-        <Abricot width={252} height={32} color="#D3590B" priority></Abricot>
+        <Abricot width={252} height={32} color="#D3590B"></Abricot>
         <form className={styles.form}>
           <h2>Inscription</h2>
           <label htmlFor={email_id}>Email</label>
