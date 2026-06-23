@@ -6,3 +6,4 @@ export { default as CreateTaskDialogIA } from "./CreateTaskDialogIA";
 export { default as UpdateTaskDialog } from "./UpdateTaskDialog";
 export { default as CreateProjectDialog } from "./CreateProjectDialog";
 export { default as UpdateProjectDialog } from "./UpdateProjectDialog";
+export { default as ErrorMessage } from "./ErrorMessage";

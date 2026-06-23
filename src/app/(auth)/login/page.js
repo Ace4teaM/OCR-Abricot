@@ -3,6 +3,7 @@
 import styles from "./page.module.css";
 import {Button} from "@/components/Buttons";
 import {Abricot} from "@/components/Icons";
+import {ErrorMessage} from "@/components/Parts";
 import {usePost} from "@/hooks/Http";
 import Image from 'next/image'
 import Link from 'next/link'
@@ -62,8 +63,9 @@ export default function LogIn() {
           <input id={email_id} name="email" type="email"></input>
           <label htmlFor={password_id}>Mot de passe</label>
           <input id={password_id} name="password" type="password"></input>
-          <Button className={styles.submit} onClick={(e)=>handleSubmit(e)}>Se connecter</Button>
+          <Button className={styles.submit} onClick={(e)=>handleSubmit(e)} disabled={login.isLoading == true}>Se connecter</Button>
           <div className={styles.lost}><Link href="/lost">Mot de passe oublié?</Link></div>
+          <ErrorMessage active={login.error} data={login.data}></ErrorMessage>
         </form>
         <div>Pas encore de compte ? <Link href="/signin">Créer un compte</Link></div>
       </div>

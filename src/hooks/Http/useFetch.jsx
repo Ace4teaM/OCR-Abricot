@@ -17,16 +17,24 @@ export default function useFetch(url, domain = process.env.NEXT_PUBLIC_USER_API_
     useEffect(() => {
         async function fetchData() {
             try {
+                console.log("fetch...")    
+
                 const response = await fetch(`${domain}/${url}`, 
                     {
                         method: "GET",
                         credentials: "include"
                     }
                 );
-                if(response.status != 200)
+                
+                console.log("response.status", response.status)    
+
+                if (!response.ok)
                 {
-                    setData(response)
-                    setError(true)
+                    const errorData = await response.json().catch(() => null);
+
+                    throw new Error(
+                        errorData?.message ?? `Erreur HTTP ${response.status}`
+                    );
                 }
 
                 if(response.headers.get("content-type")?.includes("application/json")) // ex: Content-Type: application/json; charset=utf-8
@@ -39,8 +47,18 @@ export default function useFetch(url, domain = process.env.NEXT_PUBLIC_USER_API_
                     setData(data)
                 }
             } catch (err) {
-                console.log(err)
-                setData(err)
+                console.log("fetch exception", typeof err, err)    
+                if (err instanceof Error && err.name === "NotAllowedError" ) {
+                    setData("Le serveur a refusé la demande, veuillez reéssayer")
+                } else if (err instanceof Error && err.name === "TypeError" ) {
+                    setData("Le serveur ne semble pas accessible, veuillez reéssayer")
+                } else if (err instanceof TypeError) {
+                    setData("Le serveur ne semble pas accessible, veuillez reéssayer")
+                } else if (err instanceof Error && err.name === "AbortError") {
+                    setData("La demande à été annulée, veuillez reéssayer")
+                } else {
+                    setData(err)
+                }
                 setError(true)
             } finally {
                 setLoading(false)
