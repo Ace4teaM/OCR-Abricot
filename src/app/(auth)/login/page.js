@@ -34,14 +34,6 @@ export default function LogIn() {
     }
   }, [login.hasData])
 
-  useEffect(()=>{
-    if(login.error)
-    {
-      console.log("login.error", login.error, login.data)
-      return
-    }
-  }, [login.error])
-
   const handleSubmit = (e) => {
     e.preventDefault(); // Empêche la soumission du formulaire
     
