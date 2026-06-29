@@ -12,7 +12,7 @@ const UserButton = ({
       className={styles.container}
       {...props}
     >
-      {firstname.at(0).toUpperCase()}{lastname.at(1).toUpperCase()}
+      {firstname.at(0).toUpperCase()}{lastname.at(0).toUpperCase()}
     </BaseButton>
   );
 };
