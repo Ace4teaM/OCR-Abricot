@@ -1,12 +1,21 @@
+"use client"
+
 import { memo } from 'react';
 import styles from './MainMenu.module.css';
 import {MenuItemButton, UserButton} from '@/components/Buttons'
 import {Abricot} from '@/components/Icons'
 import Link from 'next/link'
+import { useAuth } from "@/contexts/AuthContext";
 
 const MainMenu = ({
   ...props
 }) => {
+  const { isLogged, userData } = useAuth()
+  
+  // Attent les informations sur l'utilisateur
+  if (!isLogged) {
+      return null; 
+  }
 
   return (
     <nav
@@ -18,7 +27,7 @@ const MainMenu = ({
             <Link href="/dashboard"><MenuItemButton iconName = "dashboard" as="span">Tableau de bord</MenuItemButton></Link>
             <Link href="/projects"><MenuItemButton iconName = "project" as="span">Projets</MenuItemButton></Link>
         </div>
-        <Link href="/account"><UserButton as="span"></UserButton></Link>
+        <Link href="/account"><UserButton as="span" {...userData}></UserButton></Link>
     </nav>
   );
 };

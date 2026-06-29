@@ -23,7 +23,7 @@ export default function LogIn() {
     if(login.hasData == false || login.data.length == 0)
       return
 
-    console.log("login.data", login.data)
+    console.log("login.data", login.data.data.user)
 
     if(login.data.success)
     {

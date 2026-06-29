@@ -5,20 +5,26 @@ import {SearchInput} from "@/components/Inputs";
 import {Button, ChipButton} from "@/components/Buttons";
 import {TagLabel} from "@/components/Labels";
 import {TaskCard} from "@/components/Cards";
-import Link from 'next/link'
-import { useId, useState } from "react";
+import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Dashboard() {
+  const { isLogged, userData } = useAuth()
   
   const [viewMode, setViewMode] = useState("list")
 
+  // Attent les informations sur l'utilisateur
+  if (!isLogged) {
+      return null;
+  }
+  
   return (
     <div className={styles.page}>
       <header className={styles.header}>
         <div className={styles.headerInfos}>
           <div>
             <h2>Tableau de bord</h2>
-            <p>Bonjour Alice Dupont, voici un aperçu de vos projets et tâches</p>
+            <p>Bonjour {userData.name}, voici un aperçu de vos projets et tâches</p>
           </div>
           <div>
             <Button>+ Créer un projet</Button>

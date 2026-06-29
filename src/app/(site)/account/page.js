@@ -4,53 +4,26 @@ import styles from "./page.module.css";
 import {Button} from "@/components/Buttons";
 import { useEffect, useState, useRef } from "react";
 import {useFetch} from "@/hooks/Http";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Account() {
+  const { isLogged, userData } = useAuth()
   const formRef = useRef();
-  /*
-    {
-      "id": "string",
-      "email": "user@example.com",
-      "name": "string",
-      "createdAt": "2026-06-23T11:53:12.390Z",
-      "updatedAt": "2026-06-23T11:53:12.390Z"
-    }
-  */
-  const profile = useFetch("auth/profile", process.env.NEXT_PUBLIC_USER_API_URL)
-
+  
   const [email, setEmail] = useState("")
   const [firstname, setFirstname] = useState("")
   const [lastname, setLastname] = useState("")
   const [password, setPassword] = useState("")
 
   useEffect(()=>{
-    if(profile.hasData == false || profile.data.length == 0)
-      return
+    if(!isLogged)
+      return;
 
-    const data = profile.data;
+    setEmail(userData?.email ?? "")
+    setFirstname(userData?.firstname ?? "")
+    setLastname(userData?.lastname ?? "")
+  }, [isLogged, userData])
 
-    console.log("data", data)
-
-    if(profile.data.success)
-    {
-      const name = data.data.user.name.split(' ', 2)
-      setFirstname(name[0] ?? "")
-      setLastname(name[1] ?? "")
-      setEmail(data.data.user.email)
-    }
-    else{
-      /* gestion des erreurs */
-    }
-  }, [profile.hasData])
-
-  useEffect(()=>{
-    if(profile.error)
-    {
-      console.log("error", profile.error, profile.data)
-      return
-    }
-  }, [profile.error])
-  
   const handleSubmit = (e) => {
     e.preventDefault(); // Empêche la soumission du formulaire
     
@@ -68,7 +41,7 @@ export default function Account() {
         <div className={styles.headerInfos}>
           <div>
             <h2>Mon compte</h2>
-            <p>Amélie Dupont</p>
+            <p>{firstname} {lastname}</p>
           </div>
         </div>
       </header>

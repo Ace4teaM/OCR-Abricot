@@ -4,43 +4,88 @@ import { createContext, useEffect, useContext, useState, useRef } from "react";
 const AuthContext = createContext()
 
 export function AuthProvider({ children }) {
-  const [userToken, setUserToken] = useState(null)
-  const [userId, setUserId] = useState(null)
-  const [logged, setLogged] = useState(null)
+  const [userData, setUserData] = useState(null)
+  const [isLogged, setIsLogged] = useState(false)
   const [isReady, setIsReady] = useState(false)
 
   // false si l'initialisation n'a pas encore eu lieu
   const didInit = useRef(false)
 
+   async function fetchData() {
+    try {
+        const response = await fetch(
+            `${process.env.NEXT_PUBLIC_USER_API_URL}/auth/profile`,
+            {
+                method: "GET",
+                credentials: "include"
+            }
+        );
+
+        console.log("response.status", response.status);
+
+        if (
+            response.ok &&
+            response.headers.get("content-type")?.includes("application/json")
+        ) {
+            const data = await response.json();
+            console.log("get user data");
+            setUserData(data.data.user);
+        } else {
+            console.log("no user data");
+            setUserData(null);
+        }
+
+    } catch (err) {
+        console.log("get user data ERROR", err);
+        setUserData(null);
+    }
+  }
+
   useEffect(() => {
+    console.log("AuthProvider monté");
     if (didInit.current) return
     didInit.current = true
 
-    // Ajustement premier rendu uniquement
-    setUserToken(localStorage.getItem("token"))
-    setUserId(localStorage.getItem("userId"))
-    setLogged(localStorage.getItem("token") != null)
-    setIsReady(true)
+    // obtient les infos sur l'user en cours
+    fetchData();
+    
+    setIsReady(true);
+
+    return () => console.log("AuthProvider démonté");
   }, [])
 
   useEffect(()=>{
     if (!didInit.current) return
-    if(userToken == null)
-      localStorage.removeItem("token");
-    else
-      localStorage.setItem("token", userToken);
-  }, [userToken])
+    
+    if(userData instanceof Object)
+    {
+      console.log("userData",userData)
 
-  useEffect(()=>{
-    if (!didInit.current) return
-    if(userToken == null)
-      localStorage.removeItem("userId");
+      Object.defineProperty(userData, "firstname", {
+          get() {
+              return this.name?.split(" ", 2)[0] ?? "";
+          },
+          enumerable: true
+      });
+
+      Object.defineProperty(userData, "lastname", {
+          get() {
+              return this.name?.split(" ", 2)[1] ?? "";
+          },
+          enumerable: true
+      });
+
+      setIsLogged(true)
+    }
     else
-      localStorage.setItem("userId", userId);
-  }, [userId])
+    {
+      setIsLogged(false)
+    }
+  }, [userData])
+
 
   return (
-    <AuthContext.Provider value={{ userToken, setUserToken, userId, setUserId, logged, setLogged, isReady}}>
+    <AuthContext.Provider value={{ userData, setUserData, isLogged, isReady}}>
         {children}
     </AuthContext.Provider>
   )
