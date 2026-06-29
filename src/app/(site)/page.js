@@ -3,7 +3,6 @@ import {IAButton, ChipButton, MenuItemButton, IconButton, Button} from "@/compon
 import {TagLabel} from "@/components/Labels";
 import {ProjectCard, TaskCard} from "@/components/Cards";
 import {UserComment} from "@/components/Parts";
-import Modals from "./Modals";
 
 
 export default function Home() {
@@ -11,7 +10,6 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main>
-        <Modals></Modals>
         <div>
           <ChipButton>Personnalisé</ChipButton>
           <ChipButton type="task">Mes tâches</ChipButton>

@@ -1,10 +1,8 @@
 import { memo } from 'react';
 import styles from './CreateTaskDialog.module.css';
-import Image from 'next/image'
 import {Button} from "@/components/Buttons";
 import {TagLabel} from "@/components/Labels";
 import {SelectInput} from "@/components/Inputs";
-import {ModalDialog} from "@/components/Containers";
 
 const CreateTaskDialog = ({
   ...props
@@ -20,30 +18,28 @@ const CreateTaskDialog = ({
   };
 
   return (
-    <ModalDialog {...props}>
-      <div className={styles.content}>
-        <h2>Créer une tâche</h2>
-        <form>
-          <label>Titre*</label>
-          <input required type='text'></input>
-          <label>Description*</label>
-          <input required type='text'></input>
-          <label>Échéance*</label>
-          <input required type='date'></input>
-          <label>Assigné à :</label>
-          <SelectInput placeholder="Choisir un ou plusieurs collaborateurs"></SelectInput>
-          <label>Statut :</label>
-          <div className={styles.tags}>
-            <TagLabel>À faire</TagLabel>
-            <TagLabel>En cours</TagLabel>
-            <TagLabel>Terminée</TagLabel>
-          </div>
-        </form>
-        <div className={styles.footer}>
-          <Button>+ Ajouter une tâche</Button>
+    <div className={styles.content}>
+      <h2>Créer une tâche</h2>
+      <form>
+        <label>Titre*</label>
+        <input required type='text'></input>
+        <label>Description*</label>
+        <input required type='text'></input>
+        <label>Échéance*</label>
+        <input required type='date'></input>
+        <label>Assigné à :</label>
+        <SelectInput placeholder="Choisir un ou plusieurs collaborateurs"></SelectInput>
+        <label>Statut :</label>
+        <div className={styles.tags}>
+          <TagLabel>À faire</TagLabel>
+          <TagLabel>En cours</TagLabel>
+          <TagLabel>Terminée</TagLabel>
         </div>
+      </form>
+      <div className={styles.footer}>
+        <Button>+ Ajouter une tâche</Button>
       </div>
-    </ModalDialog>
+    </div>
   );
 };
 

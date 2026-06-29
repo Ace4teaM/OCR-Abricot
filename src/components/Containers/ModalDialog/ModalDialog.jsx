@@ -1,11 +1,13 @@
 "use client"
 
-import { useEffect, useState, useRef, useMemo, useId } from 'react';
+import { useRef, useId } from 'react';
 import styles from './ModalDialog.module.css'
 import {BaseCard} from "@/components/Cards";
+import {X} from "lucide-react";
 
 const ModalDialog = ({
     children,
+    closeDialog= ()=>{},
     ...props
 }) => {
     
@@ -14,6 +16,7 @@ const ModalDialog = ({
   const onClickClose = (e) => {
     const dlg = document.getElementById(dialog_id);
     dlg.close();
+    closeDialog();
   }
 
   const isInDialogRef = useRef(false)
@@ -25,6 +28,7 @@ const ModalDialog = ({
 
     const dlg = document.getElementById(dialog_id);
     dlg.close();
+    closeDialog();
   }
 
   const handleMouseDown = (e) => {
@@ -43,7 +47,7 @@ const ModalDialog = ({
   return (
     <dialog id={dialog_id} className={styles.container} onMouseUp={handleMouseUp} onMouseDown={handleMouseDown} {...props}>
       <BaseCard className={styles.content}>
-         <span className={styles.closeBtn} onClick={onClickClose}>X</span>
+         <span className={styles.closeBtn} onClick={onClickClose}><X></X></span>
          {children}
       </BaseCard>
     </dialog>

@@ -1,21 +1,51 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState, useRef } from "react";
+import {ModalDialog} from "@/components/Containers";
 
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
   const [theme, setTheme] = useState("light");
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [dialog, setDialog] = useState(null);
+  const dialogRef = useRef(null);
+
+  function openDialog(Component, props = {}) {
+      setDialog({
+          Component,
+          props
+      });
+  }
+
+  function closeDialog() {
+    console.log("closeDialog")
+      setDialog(null);
+  }
+
+  useEffect(()=>{
+    if(dialog === null)
+      return;
+    
+    var dialogInst = dialogRef.current;
+    dialogInst.showModal();
+
+  },[dialog])
 
   return (
     <AppContext.Provider
       value={{
         theme,
         setTheme,
-        sidebarOpen,
-        setSidebarOpen,
+        openDialog,
+        closeDialog
       }}
     >
       {children}
+      <ModalDialog ref={dialogRef} closeDialog={closeDialog}>
+      {dialog && (
+        <dialog.Component
+            {...dialog.props}
+        />
+      )}
+      </ModalDialog>
     </AppContext.Provider>
   );
 }
