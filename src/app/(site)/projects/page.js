@@ -5,8 +5,12 @@ import {Button} from "@/components/Buttons";
 import {ProjectCard} from "@/components/Cards";
 import { useEffect, useState } from "react";
 import {useFetch} from "@/hooks/Http";
+import {CreateProjectDialog} from "@/components/Parts";
+import {useApp} from "@/contexts/AppContext";
 
 export default function Projects() {
+  const { openDialog } = useApp();
+
   /*
   {
   "success": true,
@@ -69,14 +73,17 @@ export default function Projects() {
             <p>Gérez vos projets</p>
           </div>
           <div>
-            <Button>+ Créer un projet</Button>
+            <Button
+                onClick={() =>
+                  openDialog(CreateProjectDialog, {})
+                }>+ Créer un projet</Button>
           </div>
         </div>
       </header>
       <section>
         <div className={styles.grid}>
            {projects.hasData === true && projects.data.data.projects.map((project)=>
-              <ProjectCard {...project}></ProjectCard>
+              <ProjectCard key={project.id} {...project}></ProjectCard>
            )}
         </div>
       </section>
