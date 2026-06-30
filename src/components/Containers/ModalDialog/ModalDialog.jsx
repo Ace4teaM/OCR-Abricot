@@ -16,7 +16,6 @@ const ModalDialog = ({
   const onClickClose = (e) => {
     const dlg = document.getElementById(dialog_id);
     dlg.close();
-    closeDialog();
   }
 
   const isInDialogRef = useRef(false)
@@ -28,7 +27,6 @@ const ModalDialog = ({
 
     const dlg = document.getElementById(dialog_id);
     dlg.close();
-    closeDialog();
   }
 
   const handleMouseDown = (e) => {
@@ -45,7 +43,7 @@ const ModalDialog = ({
   }
 
   return (
-    <dialog id={dialog_id} className={styles.container} onMouseUp={handleMouseUp} onMouseDown={handleMouseDown} {...props}>
+    <dialog id={dialog_id} className={styles.container} onMouseUp={handleMouseUp} onMouseDown={handleMouseDown} onClose={closeDialog} {...props}>
       <BaseCard className={styles.content}>
          <span className={styles.closeBtn} onClick={onClickClose}><X></X></span>
          {children}
