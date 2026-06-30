@@ -8,16 +8,20 @@ export function AppProvider({ children }) {
   const [dialog, setDialog] = useState(null);
   const dialogRef = useRef(null);
 
-  function openDialog(Component, props = {}) {
+  function openDialog(Component, props = {}, success = () => {}, resolve = (result) => {}) {
       setDialog({
           Component,
-          props
+          props,
+          success,
+          resolve
       });
   }
 
-  function closeDialog() {
-    console.log("closeDialog")
-      setDialog(null);
+  function closeDialog(result) {
+    if(result === true)
+      dialog.success()
+    dialog.resolve(result)
+    setDialog(null);
   }
 
   useEffect(()=>{
@@ -39,13 +43,10 @@ export function AppProvider({ children }) {
       }}
     >
       {children}
-      <ModalDialog ref={dialogRef} closeDialog={closeDialog}>
       {dialog && (
-        <dialog.Component
-            {...dialog.props}
-        />
-      )}
+      <ModalDialog ref={dialogRef} closeDialog={closeDialog} Component={dialog.Component} ComponentProps={dialog.props}>
       </ModalDialog>
+      )}
     </AppContext.Provider>
   );
 }

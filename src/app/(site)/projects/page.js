@@ -75,7 +75,7 @@ export default function Projects() {
           <div>
             <Button
                 onClick={() =>
-                  openDialog(CreateProjectDialog, {})
+                  openDialog(CreateProjectDialog, {}, () => projects.retry())
                 }>+ Créer un projet</Button>
           </div>
         </div>

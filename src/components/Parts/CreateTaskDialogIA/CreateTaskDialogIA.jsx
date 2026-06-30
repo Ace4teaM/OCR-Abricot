@@ -4,6 +4,7 @@ import {Button} from "@/components/Buttons";
 import {EditTaskCard} from "@/components/Cards";
 
 const CreateTaskDialogIA = ({
+  setDialogResult,
   ...props
 }) => {
 

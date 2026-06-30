@@ -4,6 +4,7 @@ import {Button} from "@/components/Buttons";
 import {SelectInput} from "@/components/Inputs";
 
 const UpdateProjectDialog = ({
+  setDialogResult,
   ...props
 }) => {
 

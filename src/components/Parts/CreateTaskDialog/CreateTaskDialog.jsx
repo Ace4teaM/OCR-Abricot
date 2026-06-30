@@ -5,6 +5,7 @@ import {TagLabel} from "@/components/Labels";
 import {SelectInput} from "@/components/Inputs";
 
 const CreateTaskDialog = ({
+  setDialogResult,
   ...props
 }) => {
 

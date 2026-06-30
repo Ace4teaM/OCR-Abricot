@@ -8,6 +8,7 @@ import {SelectInput} from "@/components/Inputs";
 import { TASK_STATUS } from "@/constants/taskStatus";
 
 const UpdateTaskDialog = ({
+  setDialogResult,
   task={
     id: "cmqf60fde0049ijekv2w9766v",
     title: "Nom de la tâche",
