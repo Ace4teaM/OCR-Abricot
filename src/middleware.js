@@ -5,7 +5,7 @@ import { verifyToken } from "./auth";
 
 // utilise le middleware pour vérifier l'autentification
 export function middleware(req) {
-  const token = req.cookies.get("access_token");
+  let token = req.cookies.get("access_token");
 
   if (!token) {
     return NextResponse.redirect(
@@ -13,7 +13,7 @@ export function middleware(req) {
     );
   }
 
-  const user = verifyToken(token);
+  token = verifyToken(token);
   if (!token) {
     return NextResponse.redirect(
       new URL("/login", req.url)
@@ -26,6 +26,7 @@ export function middleware(req) {
 // routes qui seront controlées par le middleware
 export const config = {
   matcher: [
+    "/",
     "/account/:path*",
     "/dashboard/:path*",
     "/projects/:path*",
