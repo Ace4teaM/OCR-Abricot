@@ -65,8 +65,12 @@ export default function useFetch(url, domain = process.env.NEXT_PUBLIC_USER_API_
     }
 
     const retry = ()=>{
-        if (ready_to_fetch())
+        if (ready_to_fetch()) {
+            console.log("loading",url)
+            setLoading(true)
+            setError(false)
             fetchData()
+        }
     }
 
     const hasData = useMemo(

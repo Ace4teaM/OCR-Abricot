@@ -68,8 +68,12 @@ export default function usePost(url, post, domain = process.env.NEXT_PUBLIC_USER
     }
 
     const retry = ()=>{
-        if (ready_to_post())
+        if (ready_to_post()) {
+            console.log("loading",url,"with",post)
+            setLoading(true)
+            setError(false)
             postData()
+        }
     }
 
     useEffect(() => {
