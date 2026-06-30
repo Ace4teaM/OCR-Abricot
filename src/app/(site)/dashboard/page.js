@@ -5,7 +5,7 @@ import {SearchInput} from "@/components/Inputs";
 import {Button, ChipButton} from "@/components/Buttons";
 import {TagLabel} from "@/components/Labels";
 import {TaskCard} from "@/components/Cards";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import {useFetch} from "@/hooks/Http";
 import { TASK_STATUS } from "@/constants/taskStatus";
@@ -88,18 +88,30 @@ export default function Dashboard() {
   */
   const assigned_tasks = useFetch("dashboard/assigned-tasks", process.env.NEXT_PUBLIC_USER_API_URL)
   
+  const [searchValue, setSearchValue] = useState()
+  
   const [assignedTasksData, setAssignedTasksData] = useState([])
+  
+  const filteredTasksData = useMemo(() => {
+    const search = searchValue?.trim().toLowerCase();
+    return assignedTasksData.filter(task => {
+      return !search || task.title.toLowerCase().includes(search) || task.description.toLowerCase().includes(search) || task.project.name.toLowerCase().includes(search);
+    });
+  }, [assignedTasksData, searchValue]);
 
-  const todoTasksData = assignedTasksData.filter(
-      task => task.status === TASK_STATUS.TODO
+  const todoTasksData = useMemo(
+      () => assignedTasksData.filter(task => task.status === TASK_STATUS.TODO),
+      [assignedTasksData]
   );
 
-  const finishTasksData = assignedTasksData.filter(
-      task => task.status === TASK_STATUS.DONE
+  const inProgressTasksData = useMemo(
+      () => assignedTasksData.filter(task => task.status === TASK_STATUS.IN_PROGRESS),
+      [assignedTasksData]
   );
 
-  const inProgressTasksData = assignedTasksData.filter(
-      task => task.status === TASK_STATUS.IN_PROGRESS
+  const finishTasksData = useMemo(
+      () => assignedTasksData.filter(task => task.status === TASK_STATUS.DONE),
+      [assignedTasksData]
   );
 
   useEffect(()=>{
@@ -143,10 +155,10 @@ export default function Dashboard() {
             <h3>Mes tâches assignées</h3>
             <p>Par ordre de priorité</p>
           </div>
-          <SearchInput placeholder="Rechercher une tâche"></SearchInput>
+          <SearchInput placeholder="Rechercher une tâche" onChange={(val) => setSearchValue(val)}></SearchInput>
         </div>
         <div className={styles.listContent}>
-          {assignedTasksData.map((task)=>
+          {filteredTasksData.map((task)=>
             <TaskCard key={task.id} task={task}></TaskCard>
           )}
         </div>
