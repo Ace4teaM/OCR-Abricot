@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import styles from './StatusLabel.module.css';
 import {BaseLabel} from '@/components/Labels'
-import { TASK_STATUS } from "@/constants/taskStatus";
+import { TASK_STATUS, TASK_STATUS_LABELS } from "@/constants/taskStatus";
 
 const StatusLabel = ({
   className = "",
@@ -22,25 +22,13 @@ const StatusLabel = ({
   ...props
 }) => {
   
-  const text = () => {
-    switch(status){
-      case TASK_STATUS.TODO:
-        return "À faire";
-      case TASK_STATUS.DONE:
-        return "Terminée";
-      case TASK_STATUS.IN_PROGRESS:
-        return "En cours";
-    }
-    return "???";
-  }
-
   return (
     <BaseLabel
       className={`${styles.container} ${withBorder ? styles.containerBorder : ''}  ${className}`}
       color={color}
       {...props}
     >
-      {text()}
+      {TASK_STATUS_LABELS[status]}
     </BaseLabel>
   );
 };

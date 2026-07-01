@@ -1,0 +1,86 @@
+.container{
+    position:relative;
+    container-type: inline-size;
+    min-width: 330px;
+}
+
+.container header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container header h2{
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.tag{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.button{
+    position: relative;
+    margin-top: 20px;
+}
+
+@container (min-width: 630px) {
+    .button{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+.title{
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.description{
+    font-size: 1em;
+}
+
+.container section{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.container section > div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.container hr{
+    height: 2px;
+    color: #E5E7EB;
+    background-color: #E5E7EB;
+    border: none;
+}
+
+.commentsHeader{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.commentsList
+{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.icon
+{
+    cursor: pointer;
+}

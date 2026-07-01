@@ -1,18 +1,18 @@
 "use client"
 
 import { memo, useState, useEffect, useRef } from 'react';
-import styles from './SelectUsersInput.module.css';
-import {SelectInput} from '@/components/Inputs'
+import styles from './SearchUsersInput.module.css';
+import {SearchInput} from '@/components/Inputs'
 import {BaseLabel} from '@/components/Labels'
 import {useFetch} from "@/hooks/Http";
 import { X } from 'lucide-react';
 
-const SelectUsersInput = ({
+const SearchUsersInput = ({
   excludeUsers = [],
   placeholder = "Choisir un ou plusieurs collaborateurs",
   name = "contributors",
   selectedPath = "email",
-  defaultSelection = ""
+  defaultSelection = []
 }) => {
 
   const selectRef = useRef()
@@ -77,7 +77,7 @@ const SelectUsersInput = ({
   return (
     <>
      <input type="hidden" name={name} value={selection.map(user => user[selectedPath]).join(" ")} readOnly></input>
-     <SelectInput ref={selectRef} invalid={errorState} error={errorMessage} placeholder={placeholder} value={value} setValue={setValue} onValidate={onValidate} disabled={create.isLoading}></SelectInput>
+     <SearchInput ref={selectRef} invalid={errorState} error={errorMessage} placeholder={placeholder} value={value} setValue={setValue} onValidate={onValidate} disabled={create.isLoading}></SearchInput>
      <div className={styles.selection}>
       {selection.map((sel)=>
           <BaseLabel key={sel.id} color="blue" onClick={(e)=>setSelection(selection.filter(e => e.name !== sel.name))}>{sel.name}&nbsp;&nbsp;<X size="16"></X></BaseLabel>
@@ -87,4 +87,4 @@ const SelectUsersInput = ({
   );
 };
 
-export default memo(SelectUsersInput);
+export default memo(SearchUsersInput);

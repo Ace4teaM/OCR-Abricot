@@ -7,25 +7,46 @@ import { Search } from 'lucide-react';
  * @param {string} className - classe de style
  */
 const SearchInput = ({
-  onChange=(val)=>{},
+  error = "",
+  invalid = false,
+  value = "",
+  setValue = () => {},
+  onValidate = (val) => {},
   ...props
 }) => {
 
-  const [value, setValue] = useState("")
+  const inputRef = useRef()
 
-  const previousValue = useRef();
+  const onKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      e.stopPropagation();
+      if(value.trim() != "")
+        onValidate(value.trim())
+    }
+  }
 
+  const onButtonDown = (e) => {
+    if (value.trim() != "") {
+        onValidate(value.trim())
+    }
+  }
 
   useEffect(()=>{
-    if(previousValue.current !== undefined && value != previousValue.current)
-      onChange(value)
-    previousValue.current = value;
-  },[value])
+    console.log("invalid", invalid, error)
+    if(inputRef.current != undefined)
+    {
+      inputRef.current.setCustomValidity(error);
+      
+      if(invalid)
+        inputRef.current.reportValidity()
+    }
+  }, [invalid, error])
 
   return (
     <div className={styles.container}>
-      <input className={styles.searchInput} type="text" placeholder="Rechercher une tâche" value={value} onChange={(e) => setValue(e.target.value)} {...props}></input>
-      <Search className={styles.searchIcon} size={14}></Search>
+      <input ref={inputRef} className={styles.searchInput} type="text" value={value} onChange={(e) => setValue(e.target.value)} onKeyDown={onKeyDown} {...props}></input>
+      <Search className={styles.searchIcon} size={18} onClick={onButtonDown}></Search>
     </div>
   );
 };

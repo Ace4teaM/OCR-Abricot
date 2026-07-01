@@ -155,7 +155,7 @@ export default function Dashboard() {
             <h3>Mes tâches assignées</h3>
             <p>Par ordre de priorité</p>
           </div>
-          <SearchInput placeholder="Rechercher une tâche" onChange={(val) => setSearchValue(val)}></SearchInput>
+          <SearchInput placeholder="Rechercher une tâche" setValue={setSearchValue} value={searchValue}></SearchInput>
         </div>
         <div className={styles.listContent}>
           {filteredTasksData.map((task)=>

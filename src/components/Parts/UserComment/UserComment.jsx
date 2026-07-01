@@ -22,7 +22,6 @@ const UserComment = ({
       title: "Conception de la base de données"
     }
   },
-  hasNew = false,
   ...props
 }) => {
 
@@ -62,17 +61,11 @@ const UserComment = ({
       {...props}
     >
         <UserLabel withBorder={true} user={comment.author}></UserLabel>
-        {!hasNew ?
-          <div className={styles.content}>
-            <div className={styles.title}>{comment.author.name}</div>
-            <div className={styles.comment}>{comment.content}</div>
-            <div className={styles.date}>{formatDate(comment.updatedAt)}</div>
-          </div>
-          :
-          <div className={styles.content}>
-            <input type='text' className={styles.comment} value={text} onChange={(e)=>setText(e.target.value)} placeholder='Ajouter un commentaire...'></input>
-          </div>
-        }
+        <div className={styles.content}>
+          <div className={styles.title}>{comment.author.name}</div>
+          <div className={styles.comment}>{comment.content}</div>
+          <div className={styles.date}>{formatDate(comment.updatedAt)}</div>
+        </div>
     </div>
   );
 };

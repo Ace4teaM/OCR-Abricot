@@ -3,7 +3,7 @@
 import { memo, useState, useEffect } from 'react';
 import styles from './CreateProjectDialog.module.css';
 import {Button} from "@/components/Buttons";
-import {SelectUsersInput} from "@/components/Parts";
+import {SearchUsersInput} from "@/components/Parts";
 import {usePost} from "@/hooks/Http";
 import {ErrorMessage} from "@/components/Parts";
 import { useAuth } from "@/contexts/AuthContext";
@@ -65,7 +65,7 @@ const CreateProjectDialog = ({
         <label>Description</label>
         <input required type='text' name="description"></input>
         <label>Contributeurs :</label>
-        <SelectUsersInput name="contributors" selectedPath="email" placeholder="Choisir un ou plusieurs collaborateurs" excludeUsers={[userData]}></SelectUsersInput>
+        <SearchUsersInput name="contributors" selectedPath="email" placeholder="Choisir un ou plusieurs collaborateurs" excludeUsers={[userData]}></SearchUsersInput>
         <div className={styles.footer}>
           <Button onClick={(e)=>handleSubmit(e)}>Ajouter un projet</Button>
         </div>

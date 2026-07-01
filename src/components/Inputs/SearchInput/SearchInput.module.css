@@ -9,13 +9,15 @@
   background-color: white;
   border: 1px solid #E5E7EB;
   padding: 13px 40px 13px 20px;
-  width: 257px;
+  width: 100%;
   color:#6B7280;
 }
 
 .searchIcon{
   position: absolute;
   right: 10px;
-  top: 16px;
+  top: 12px;
   color:#6B7280;
+  cursor: pointer;
 }
+

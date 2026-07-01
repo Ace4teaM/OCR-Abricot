@@ -1,6 +1,9 @@
 .tasksList{
     padding: 20px 50px;
 }
+.tasksList > *{
+   margin-bottom: 20px;
+}
 
 .tasksHeader{
   display: flex;

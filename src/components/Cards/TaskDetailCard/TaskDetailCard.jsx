@@ -1,20 +1,17 @@
 "use client"
 
-import { memo } from 'react';
-import styles from './TaskCard.module.css';
+import { memo, useState } from 'react';
+import styles from './TaskDetailCard.module.css';
 import {BaseCard} from '@/components/Cards'
-import {StatusLabel} from '@/components/Labels'
-import {Button} from '@/components/Buttons'
-import {FolderOpen, CalendarDays, MessageSquareText} from 'lucide-react';
-import {UpdateTaskDialog} from "@/components/Parts";
-import {useApp} from "@/contexts/AppContext";
+import {IconButton} from '@/components/Buttons'
+import {UserComment, CreateUserComment} from '@/components/Parts'
+import {CalendarIcon, ChevronUp, ChevronDown} from 'lucide-react';
+import { StatusLabel,UserLabel, TagLabel } from '@/components/Labels';
 
-const TaskCard = ({
+const TaskDetailCard = ({
   minWidth="380px",
   minHeight="350px",
   
-  updateTaskSuccess = () => {},
-
   task={
     id: "cmqf60fde0049ijekv2w9766v",
     title: "Nom de la tâche",
@@ -72,10 +69,15 @@ const TaskCard = ({
           }
         ],
   },
-
+  owner={
+    id: "cmqf60f4d0009ijek4s1ecg6r",
+    email: "",
+    name: "Jacques Durand"
+  },
   ...props
 }) => {
-  const { openDialog } = useApp();
+
+  const [showComments, setShowComments] = useState(false)
 
   function formatShortDate(date) {
       return new Intl.DateTimeFormat("fr-FR", {
@@ -84,36 +86,52 @@ const TaskCard = ({
       }).format(new Date(date));
   }
 
-  function formatLongDate(date) {
-      return new Intl.DateTimeFormat("fr-FR", {
-          dateStyle: "long",
-          timeStyle: "short"
-      }).format(new Date(date));
-  }
-
-
   return (
     <BaseCard {...props} minWidth={minWidth} minHeight={minHeight}>
       <div className={styles.container}>
         <header>
-          <h2>{task.title}</h2>
-          <p className={styles.description}>{task.description}</p>
-          <StatusLabel className={styles.tag} status={task.status}></StatusLabel>
+          <div>
+            <h2>{task.title}</h2>
+            <StatusLabel status={task.status}></StatusLabel>
+            <p className={styles.description}>{task.description}</p>
+          </div>
+          <IconButton iconName="..."></IconButton>
         </header>
         <section>
-          <FolderOpen></FolderOpen> {task.project.name} | <CalendarDays></CalendarDays> <span title={formatLongDate(task.dueDate)}>{formatShortDate(task.dueDate)}</span> | <MessageSquareText></MessageSquareText> {task.comments.length}
+          <div>
+            <span>Échéance :&nbsp;</span>
+            <CalendarIcon size={16}></CalendarIcon>
+            {formatShortDate(task.dueDate)}
+          </div>
+          <div>
+            <span>Assigné à :</span> 
+            {task.assignees.map((member)=>
+              <span key={member.id}>
+                <UserLabel key={member.id} withBorder={true} color="gray" user={member.user}></UserLabel>
+                <TagLabel color="gray">{member.user.name}</TagLabel>
+              </span>
+            )}
+          </div>
         </section>
         <footer>
-          <Button className={styles.button}
-           onClick={() =>
-              openDialog(UpdateTaskDialog, {
-                  task: task
-              }, updateTaskSuccess)
-          }>Voir</Button>
+          <hr></hr>
+          <div className={styles.commentsHeader}>
+            <span>Commentaires ({task.comments.length})</span>
+            {showComments === false && <ChevronUp className={styles.icon} size={24} onClick={(e)=>setShowComments(true)}></ChevronUp>}
+            {showComments === true && <ChevronDown className={styles.icon} size={24} onClick={(e)=>setShowComments(false)}></ChevronDown>}
+          </div>
+          {showComments &&
+          <div className={styles.commentsList}>
+            {task.comments.map((comment) => (
+              <UserComment key={comment.id} comment={comment}></UserComment>
+            ))}
+            <CreateUserComment owner={owner}></CreateUserComment>
+          </div>
+          }
         </footer>
       </div>
     </BaseCard>
   );
 };
 
-export default memo(TaskCard);
+export default memo(TaskDetailCard);

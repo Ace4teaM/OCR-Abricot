@@ -1,8 +1,8 @@
 import styles from "./page.module.css";
 import {IAButton, ChipButton, MenuItemButton, IconButton, Button} from "@/components/Buttons";
 import {TagLabel} from "@/components/Labels";
-import {ProjectCard, TaskCard} from "@/components/Cards";
-import {UserComment} from "@/components/Parts";
+import {ProjectCard, TaskCard, EditTaskCard, TaskDetailCard} from "@/components/Cards";
+import {UserComment, CreateUserComment} from "@/components/Parts";
 
 
 export default function Home() {
@@ -37,9 +37,11 @@ export default function Home() {
           <TagLabel color="gray"></TagLabel>
         </div>
         <TaskCard></TaskCard>
+        <EditTaskCard></EditTaskCard>
+        <TaskDetailCard></TaskDetailCard>
         <ProjectCard></ProjectCard>
         <UserComment></UserComment>
-        <UserComment hasNew={true}></UserComment>
+        <CreateUserComment></CreateUserComment>
       </main>
     </div>
   );

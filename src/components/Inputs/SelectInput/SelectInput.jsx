@@ -1,54 +1,46 @@
 "use client"
 import { memo, useState, useEffect, useRef } from 'react';
 import styles from './SelectInput.module.css';
-import { Search } from 'lucide-react';
+import {ChevronUp, ChevronDown, X} from 'lucide-react';
 
 /**
  * @param {string} className - classe de style
  */
-const Select = ({
-  error = "",
-  invalid = false,
-  value = "",
-  setValue = () => {},
-  onValidate = (val) => {},
+const SelectInput = ({
+  onChange=(val)=>{},
+  values={},
+  labels={},
+  placeholder="Choix...",
+  defaultValue="",
   ...props
 }) => {
 
-  const inputRef = useRef()
+  const [value, setValue] = useState(defaultValue)
 
-  const onKeyDown = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      e.stopPropagation();
-      if(value.trim() != "")
-        onValidate(value.trim())
-    }
-  }
+  const [show, setShow] = useState(false)
 
-  const onButtonDown = (e) => {
-    if (value.trim() != "") {
-        onValidate(value.trim())
-    }
-  }
+  const previousValue = useRef();
+
 
   useEffect(()=>{
-    console.log("invalid", invalid, error)
-    if(inputRef.current != undefined)
-    {
-      inputRef.current.setCustomValidity(error);
-      
-      if(invalid)
-        inputRef.current.reportValidity()
-    }
-  }, [invalid, error])
+    if(previousValue.current !== undefined && value != previousValue.current)
+      onChange(value)
+    previousValue.current = value;
+  },[value])
 
   return (
     <div className={styles.container}>
-      <input ref={inputRef} className={styles.searchInput} type="text" value={value} onChange={(e) => setValue(e.target.value)} onKeyDown={onKeyDown} {...props}></input>
-      <Search className={styles.searchIcon} size={14} onClick={onButtonDown}></Search>
+      <input className={styles.searchInput} type="text" readOnly placeholder={placeholder} onClick={(e)=>setShow(!show)} value={value} {...props}></input>
+      {show === false && <ChevronUp className={styles.searchIcon} size={24} onClick={(e)=>setShow(true)}></ChevronUp>}
+      {show === true && <ChevronDown className={styles.searchIcon} size={24} onClick={(e)=>setShow(false)}></ChevronDown>}
+      {show === true && <div className={styles.valuesContainer}>
+        <div className={styles.value} onClick={(e)=>{setValue(""); setShow(false)}}><X size={16}></X>Supprimer le filtre</div>
+        {Object.entries(values).map(([key, value]) => 
+          <div key={key} className={styles.value} onClick={(e)=>{setValue(value); setShow(false)}}>{Object.hasOwn(labels,key) ? labels[key] : value}</div>
+        )}
+      </div>}
     </div>
   );
 };
 
-export default memo(Select);
+export default memo(SelectInput);

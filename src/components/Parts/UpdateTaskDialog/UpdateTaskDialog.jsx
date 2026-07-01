@@ -4,7 +4,7 @@ import { memo, useState, useEffect } from 'react';
 import styles from './UpdateTaskDialog.module.css';
 import {Button} from "@/components/Buttons";
 import {StatusLabel} from "@/components/Labels";
-import {SelectUsersInput} from "@/components/Parts";
+import {SearchUsersInput} from "@/components/Parts";
 import { TASK_STATUS } from "@/constants/taskStatus";
 import {usePut} from "@/hooks/Http";
 import {ErrorMessage} from "@/components/Parts";
@@ -130,7 +130,7 @@ const UpdateTaskDialog = ({
         <label>Échéance</label>
         <input required name="dueDate" type='date' defaultValue={task.dueDate.substring(0, 10)}></input>
         <label>Assigné à :</label>
-        <SelectUsersInput name="assigneeIds" selectedPath="id" defaultSelection={task.assignees.map((e)=>e.user)} placeholder="Choisir un ou plusieurs collaborateurs"></SelectUsersInput>
+        <SearchUsersInput name="assigneeIds" selectedPath="id" defaultSelection={task.assignees.map((e)=>e.user)} placeholder="Choisir un ou plusieurs collaborateurs"></SearchUsersInput>
         <label>Statut :</label>
         <div className={styles.tags}>
           <StatusLabel status={TASK_STATUS.TODO} color={status == TASK_STATUS.TODO ? undefined : "gray"} onClick={(e)=>setStatus(TASK_STATUS.TODO)}></StatusLabel>
