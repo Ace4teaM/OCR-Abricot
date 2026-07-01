@@ -2,23 +2,35 @@
 
 import { memo, useState } from 'react';
 import styles from './UserComment.module.css';
-import Image from 'next/image'
 import {UserLabel} from '@/components/Labels'
 
 const UserComment = ({
-  firstname = "Bertrand",
-  lastname = "Dupond",
-  date = "2026-06-17T11:20:00",
-  comment = "Attention à bien gérer l'expiration des tokens et le refresh automatique côté client.",
+  comment={
+    id: "cmqf60f6r0019ijekoy59ribo",
+    content: "Base de données créée avec succès. Toutes les tables sont en place et les relations sont correctes.",
+    createdAt: "2026-06-15T12:04:00.868Z",
+    updatedAt: "2026-06-15T12:04:00.868Z",
+    taskId: "cmqf60f6c0013ijekptzaydq6",
+    authorId: "cmqf60era0002ijek65kc2x07",
+    author: {
+      id: "cmqf60era0002ijek65kc2x07",
+      email: "caroline@example.com",
+      name: "Caroline Leroy"
+    },
+    task: {
+      id: "cmqf60f6c0013ijekptzaydq6",
+      title: "Conception de la base de données"
+    }
+  },
   hasNew = false,
   ...props
 }) => {
 
-  const [text, setText] = useState(comment)
+  const [text, setText] = useState(comment.content)
 
   const formatDate = (value) => {
 
-    date = Number.NaN;
+    let date = Number.NaN;
 
     if (value instanceof Date && !isNaN(value))
     {
@@ -49,12 +61,12 @@ const UserComment = ({
       className={styles.container}
       {...props}
     >
-        <UserLabel withBorder={true} firstname = {firstname} lastname = {lastname}></UserLabel>
+        <UserLabel withBorder={true} user={comment.author}></UserLabel>
         {!hasNew ?
           <div className={styles.content}>
-            <div className={styles.title}>{firstname} {lastname}</div>
-            <div className={styles.comment}>{comment}</div>
-            <div className={styles.date}>{formatDate(date)}</div>
+            <div className={styles.title}>{comment.author.name}</div>
+            <div className={styles.comment}>{comment.content}</div>
+            <div className={styles.date}>{formatDate(comment.updatedAt)}</div>
           </div>
           :
           <div className={styles.content}>

@@ -83,7 +83,7 @@ export default function Projects() {
       <section>
         <div className={styles.grid}>
            {projects.hasData === true && projects.data.data.projects.map((project)=>
-              <ProjectCard key={project.id} {...project}></ProjectCard>
+              <ProjectCard key={project.id} project={project}></ProjectCard>
            )}
         </div>
       </section>
