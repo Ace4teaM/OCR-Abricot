@@ -4,17 +4,7 @@ import styles from './BaseLabel.module.css';
 const BaseLabel = ({
   className = "",
   children = "label",
-  color = () => { /* string | func */
-    switch(children){
-      case "À faire":
-        return "red";
-      case "Terminée":
-        return "green";
-      case "En cours":
-        return "yellow";
-    }
-    return "green";
-  },
+  color = "green",
   ...props
 }) => {
 

@@ -3,7 +3,7 @@
 import { memo, useState, useEffect } from 'react';
 import styles from './UpdateTaskDialog.module.css';
 import {Button} from "@/components/Buttons";
-import {TagLabel} from "@/components/Labels";
+import {StatusLabel} from "@/components/Labels";
 import {SelectUsersInput} from "@/components/Parts";
 import { TASK_STATUS } from "@/constants/taskStatus";
 import {usePut} from "@/hooks/Http";
@@ -133,9 +133,9 @@ const UpdateTaskDialog = ({
         <SelectUsersInput name="assigneeIds" selectedPath="id" defaultSelection={task.assignees.map((e)=>e.user)} placeholder="Choisir un ou plusieurs collaborateurs"></SelectUsersInput>
         <label>Statut :</label>
         <div className={styles.tags}>
-          <TagLabel color={status == TASK_STATUS.TODO ? undefined : "gray"} onClick={(e)=>setStatus(TASK_STATUS.TODO)}>À faire</TagLabel>
-          <TagLabel color={status == TASK_STATUS.IN_PROGRESS ? undefined : "gray"} onClick={(e)=>setStatus(TASK_STATUS.IN_PROGRESS)}>En cours</TagLabel>
-          <TagLabel color={status == TASK_STATUS.DONE ? undefined : "gray"} onClick={(e)=>setStatus(TASK_STATUS.DONE)}>Terminée</TagLabel>
+          <StatusLabel status={TASK_STATUS.TODO} color={status == TASK_STATUS.TODO ? undefined : "gray"} onClick={(e)=>setStatus(TASK_STATUS.TODO)}></StatusLabel>
+          <StatusLabel status={TASK_STATUS.IN_PROGRESS} color={status == TASK_STATUS.IN_PROGRESS ? undefined : "gray"} onClick={(e)=>setStatus(TASK_STATUS.IN_PROGRESS)}></StatusLabel>
+          <StatusLabel status={TASK_STATUS.DONE} color={status == TASK_STATUS.DONE ? undefined : "gray"} onClick={(e)=>setStatus(TASK_STATUS.DONE)}></StatusLabel>
         </div>
         <div className={styles.footer}>
           <Button onClick={(e)=>handleSubmit(e)}>Enregistrer</Button>

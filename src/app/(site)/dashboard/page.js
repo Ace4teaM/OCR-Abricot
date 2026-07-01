@@ -159,7 +159,7 @@ export default function Dashboard() {
         </div>
         <div className={styles.listContent}>
           {filteredTasksData.map((task)=>
-            <TaskCard key={task.id} task={task}></TaskCard>
+            <TaskCard key={task.id} task={task} updateTaskSuccess={() => assigned_tasks.retry()}></TaskCard>
           )}
         </div>
       </section>
@@ -167,23 +167,23 @@ export default function Dashboard() {
       <section>
         <div className={styles.kabanColumns}>
           <div className={styles.columnContent}>
-            <div className={styles.columnStatus}>A faire <TagLabel>{todoTasksData.length}</TagLabel></div>
+            <div className={styles.columnStatus}>A faire <TagLabel color="red">{todoTasksData.length}</TagLabel></div>
             {todoTasksData.map(task => (
-                <TaskCard key={task.id} task={task} />
+                <TaskCard key={task.id} task={task} updateTaskSuccess={() => assigned_tasks.retry()} />
               ))
             }
           </div>
           <div className={styles.columnContent}>
-            <div className={styles.columnStatus}>En cours <TagLabel>{inProgressTasksData.length}</TagLabel></div>
+            <div className={styles.columnStatus}>En cours <TagLabel color="orange">{inProgressTasksData.length}</TagLabel></div>
             {inProgressTasksData.map(task => (
-                <TaskCard key={task.id} task={task} />
+                <TaskCard key={task.id} task={task} updateTaskSuccess={() => assigned_tasks.retry()} />
               ))
             }
           </div>
           <div className={styles.columnContent}>
-            <div className={styles.columnStatus}>Terminées <TagLabel>{finishTasksData.length}</TagLabel></div>
+            <div className={styles.columnStatus}>Terminées <TagLabel color="green">{finishTasksData.length}</TagLabel></div>
             {finishTasksData.map(task => (
-                <TaskCard key={task.id} task={task} />
+                <TaskCard key={task.id} task={task} updateTaskSuccess={() => assigned_tasks.retry()} />
               ))
             }
           </div>

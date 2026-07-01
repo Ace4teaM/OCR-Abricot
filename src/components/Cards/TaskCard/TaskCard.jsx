@@ -3,7 +3,7 @@
 import { memo } from 'react';
 import styles from './TaskCard.module.css';
 import {BaseCard} from '@/components/Cards'
-import {TagLabel} from '@/components/Labels'
+import {StatusLabel} from '@/components/Labels'
 import {Button} from '@/components/Buttons'
 import {FolderOpen, CalendarDays, MessageSquareText} from 'lucide-react';
 import {UpdateTaskDialog} from "@/components/Parts";
@@ -13,6 +13,8 @@ const TaskCard = ({
   minWidth="380px",
   minHeight="350px",
   
+  updateTaskSuccess = () => {},
+
   task={
     id: "cmqf60fde0049ijekv2w9766v",
     title: "Nom de la tâche",
@@ -82,6 +84,13 @@ const TaskCard = ({
       }).format(new Date(date));
   }
 
+  function formatLongDate(date) {
+      return new Intl.DateTimeFormat("fr-FR", {
+          dateStyle: "long",
+          timeStyle: "short"
+      }).format(new Date(date));
+  }
+
 
   return (
     <BaseCard {...props} minWidth={minWidth} minHeight={minHeight}>
@@ -89,17 +98,17 @@ const TaskCard = ({
         <header>
           <h2>{task.title}</h2>
           <p className={styles.description}>{task.description}</p>
-          <TagLabel className={styles.tag}>À faire</TagLabel>
+          <StatusLabel className={styles.tag} status={task.status}></StatusLabel>
         </header>
         <section>
-          <FolderOpen></FolderOpen> {task.project.name} | <CalendarDays></CalendarDays> {formatShortDate(task.createdAt)} | <MessageSquareText></MessageSquareText> {task.comments.length}
+          <FolderOpen></FolderOpen> {task.project.name} | <CalendarDays></CalendarDays> <span title={formatLongDate(task.updatedAt)}>{formatShortDate(task.updatedAt)}</span> | <MessageSquareText></MessageSquareText> {task.comments.length}
         </section>
         <footer>
           <Button className={styles.button}
            onClick={() =>
               openDialog(UpdateTaskDialog, {
                   task: task
-              })
+              }, updateTaskSuccess)
           }>Voir</Button>
         </footer>
       </div>
