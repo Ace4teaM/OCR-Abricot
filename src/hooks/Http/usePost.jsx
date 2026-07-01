@@ -53,7 +53,7 @@ export default function usePost(url, post, domain = process.env.NEXT_PUBLIC_USER
             } else if (err instanceof TypeError) {
                 setData("Le serveur ne semble pas accessible, veuillez reéssayer")
             } else if (err instanceof Error && err.name === "AbortError") {
-                setData("La demande à été annulée, veuillez reéssayer")
+                setData("La demande à été annulée, veuillez réessayer")
             } else {
                 setData(err)
             }
@@ -77,8 +77,6 @@ export default function usePost(url, post, domain = process.env.NEXT_PUBLIC_USER
     }
 
     useEffect(() => {
-        console.log("usePost >> ","isReady:",isReady,"url:",url,"post:",post,"ready to post ?",ready_to_post)
-        
         if (ready_to_post()) {
             console.log("loading",url,"with",post)
             setLoading(true)

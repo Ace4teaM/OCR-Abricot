@@ -10,7 +10,9 @@ import { X } from 'lucide-react';
 const SelectUsersInput = ({
   excludeUsers = [],
   placeholder = "Choisir un ou plusieurs collaborateurs",
-  name = "contributors"
+  name = "contributors",
+  selectedPath = "email",
+  defaultSelection = ""
 }) => {
 
   const selectRef = useRef()
@@ -18,7 +20,7 @@ const SelectUsersInput = ({
   const [ url, setUrl ] = useState(null)
   const create = useFetch(url, process.env.NEXT_PUBLIC_USER_API_URL)
 
-  const [selection, setSelection] = useState([])
+  const [selection, setSelection] = useState(Array.isArray(defaultSelection) ? defaultSelection : [])
 
   const [value, setValue] = useState("")
 
@@ -35,13 +37,13 @@ const SelectUsersInput = ({
     if(create.data.success)
     {
       create.data.data.users.forEach(element => {
-        if(!selection.some(user => user.email === element.email) && !excludeUsers.some(user => user.email === element.email))
+        if(!selection.some(user => user.id === element.id) && !excludeUsers.some(user => user.id === element.id))
         {
           users.push(element)
         }
         else
         {
-          if(selection.some(user => user.email === element.email))
+          if(selection.some(user => user.id === element.id))
             message += element.name + " est déjà dans la sélection. "
           else
             message += element.name + " ne peut pas être ajouté à la sélection. "
@@ -74,7 +76,7 @@ const SelectUsersInput = ({
 
   return (
     <>
-     <input type="hidden" name={name} value={selection.map(user => user.email).join(" ")} readOnly></input>
+     <input type="hidden" name={name} value={selection.map(user => user[selectedPath]).join(" ")} readOnly></input>
      <SelectInput ref={selectRef} invalid={errorState} error={errorMessage} placeholder={placeholder} value={value} setValue={setValue} onValidate={onValidate} disabled={create.isLoading}></SelectInput>
      <div className={styles.selection}>
       {selection.map((sel)=>

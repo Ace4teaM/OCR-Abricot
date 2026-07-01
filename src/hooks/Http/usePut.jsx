@@ -3,25 +3,28 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useAuth } from "@/contexts/AuthContext";
  
-
-export default function useFetch(url, domain = process.env.NEXT_PUBLIC_USER_API_URL) {
+export default function Put(url, put, domain = process.env.NEXT_PUBLIC_USER_API_URL) {
     const [data, setData] = useState({})
     const [isLoading, setLoading] = useState(false)
     const [error, setError] = useState(false)
     const { isReady } = useAuth()
 
-    async function fetchData() {
-        try {
-            console.log("fetch...")    
+    const hasData = useMemo(
+        () => (isLoading == false && error == false && data && Object.keys(data).length > 0)
+    ,[isLoading, error, data])
 
+    async function putData() {
+        try {
             const response = await fetch(`${domain}/${url}`, 
                 {
-                    method: "GET",
+                    method: "PUT",
+                    headers: {
+                        "Content-Type" : "application/json"
+                    },
+                    body: JSON.stringify(put),
                     credentials: "include"
                 }
             );
-            
-            console.log("response.status", response.status)    
 
             if (!response.ok)
             {
@@ -59,32 +62,28 @@ export default function useFetch(url, domain = process.env.NEXT_PUBLIC_USER_API_
             setLoading(false)
         }
     }
-    
-    const ready_to_fetch = ()=>{
-        return Boolean(isReady && url)
+
+    const ready_to_put = ()=>{
+        return Boolean(isReady && url && put)
     }
 
     const retry = ()=>{
-        if (ready_to_fetch()) {
-            console.log("loading",url)
+        if (ready_to_put()) {
+            console.log("loading",url,"with",put)
             setLoading(true)
             setError(false)
-            fetchData()
+            putData()
         }
     }
 
-    const hasData = useMemo(
-        () => (isLoading == false && error == false && data && Object.keys(data).length > 0)
-    ,[isLoading, error, data])
-
     useEffect(() => {
-        if (ready_to_fetch()) {
-            console.log("loading",url)
+        if (ready_to_put()) {
+            console.log("loading",url,"with",put)
             setLoading(true)
             setError(false)
-            fetchData()
+            putData()
         }
-    }, [isReady, url])
+    }, [isReady, url, put])
 
     return { data, isLoading, error, hasData, retry }
 }

@@ -139,7 +139,7 @@ export default function Dashboard() {
           <div>
             <Button
                 onClick={() =>
-                  openDialog(CreateProjectDialog, {})
+                  openDialog(CreateProjectDialog, {}, () => assigned_tasks.retry())
               }>+ Créer un projet</Button>
           </div>
         </div>

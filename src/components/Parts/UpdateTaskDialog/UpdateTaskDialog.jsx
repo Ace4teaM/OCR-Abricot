@@ -4,8 +4,10 @@ import { memo, useState, useEffect } from 'react';
 import styles from './UpdateTaskDialog.module.css';
 import {Button} from "@/components/Buttons";
 import {TagLabel} from "@/components/Labels";
-import {SelectInput} from "@/components/Inputs";
+import {SelectUsersInput} from "@/components/Parts";
 import { TASK_STATUS } from "@/constants/taskStatus";
+import {usePut} from "@/hooks/Http";
+import {ErrorMessage} from "@/components/Parts";
 
 const UpdateTaskDialog = ({
   setDialogResult,
@@ -70,11 +72,36 @@ const UpdateTaskDialog = ({
   ...props
 }) => {
 
-  const [title, setTitle] = useState(task.title)
-  const [description, setDescription] = useState(task.description)
-  const [dueDate, setDueDate] = useState(task.dueDate.substring(0, 10))
-  const [assignees, setAssignees] = useState(task.assignees)
   const [status, setStatus] = useState(task.status)
+
+/*
+{
+  "name": "Mon Projet",
+  "description": "Description du projet",
+  "contributors": [
+    "user1@example.com",
+    "user2@example.com"
+  ]
+}
+*/
+  const [ data, setData ] = useState(null)
+  const update = usePut(`projects/${task.project.id}/tasks/${task.id}`, data, process.env.NEXT_PUBLIC_USER_API_URL)
+
+  useEffect(()=>{
+    if(update.hasData == false || update.data.length == 0)
+      return
+
+    console.log("update.data", update.data)
+
+    if(update.data.success)
+    {
+      // déclenche la fermeture du dialogue
+      setDialogResult(true);
+    }
+    else{
+      /* gestion des erreurs */
+    }
+  }, [update.hasData])
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Empêche la soumission du formulaire
@@ -82,6 +109,13 @@ const UpdateTaskDialog = ({
     const formData = new FormData(e.target.form)
     const data = Object.fromEntries(formData.entries())
 
+    data.status = status
+
+    data.assigneeIds = data.assigneeIds.trim()
+    if(data.assigneeIds !== "")
+      data.assigneeIds = data.assigneeIds.split(" ")
+
+    setData(data);
     console.log(data);
   };
 
@@ -90,23 +124,24 @@ const UpdateTaskDialog = ({
       <h2>Modifier une tâche</h2>
       <form>
         <label>Titre</label>
-        <input required type='text' value={title} onChange={(e) => setTitle(e.target.value)}></input>
+        <input required name="title" type='text' defaultValue={task.title}></input>
         <label>Description</label>
-        <input required type='text' value={description} onChange={(e) => setDescription(e.target.value)}></input>
+        <input required name="description" type='text' defaultValue={task.description}></input>
         <label>Échéance</label>
-        <input required type='date' value={dueDate} onChange={(e) => setDueDate(e.target.value)}></input>
+        <input required name="dueDate" type='date' defaultValue={task.dueDate.substring(0, 10)}></input>
         <label>Assigné à :</label>
-        <SelectInput placeholder="Choisir un ou plusieurs collaborateurs"></SelectInput>
+        <SelectUsersInput name="assigneeIds" selectedPath="id" defaultSelection={task.assignees.map((e)=>e.user)} placeholder="Choisir un ou plusieurs collaborateurs"></SelectUsersInput>
         <label>Statut :</label>
         <div className={styles.tags}>
           <TagLabel color={status == TASK_STATUS.TODO ? undefined : "gray"} onClick={(e)=>setStatus(TASK_STATUS.TODO)}>À faire</TagLabel>
           <TagLabel color={status == TASK_STATUS.IN_PROGRESS ? undefined : "gray"} onClick={(e)=>setStatus(TASK_STATUS.IN_PROGRESS)}>En cours</TagLabel>
           <TagLabel color={status == TASK_STATUS.DONE ? undefined : "gray"} onClick={(e)=>setStatus(TASK_STATUS.DONE)}>Terminée</TagLabel>
         </div>
+        <div className={styles.footer}>
+          <Button onClick={(e)=>handleSubmit(e)}>Enregistrer</Button>
+        </div>
       </form>
-      <div className={styles.footer}>
-        <Button onClick={(e)=>handleSubmit(e)}>Enregistrer</Button>
-      </div>
+      <ErrorMessage active={update.error} data={update.data}></ErrorMessage>
     </div>
   );
 };
